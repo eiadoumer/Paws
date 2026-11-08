@@ -20,9 +20,7 @@ function App() {
   return (
     <>
     <Navbar />
-    
-    <h1 className="text-3xl font-bold text-orange-500 p-8">Pet Adoption Network</h1>
-    
+        
 
     <Routes>
       <Route path="/" element={<HomePage />} />
