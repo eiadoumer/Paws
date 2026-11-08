@@ -1,49 +1,81 @@
-import {Link} from "react-router";
+import { Link } from "react-router";
+import { REGIONS, ROLES } from "../data/constants.js";
+
 function RegisterPage() {
   return (
-
-    <>
     <main>
-        <h1>
-            Create your account.
-        </h1>
+      <h1>Create your account</h1>
 
-        <form action="/Register" method ="POST">
-       
-        <label htmlFor="email" >Username:</label>
-        <input type="email" name="email" id="email" required/>
+      <form>
+        <div>
+          <label htmlFor="name">Full name</label>
+          <input type="text" name="name" id="name" autoComplete="name" required />
+        </div>
 
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" required/>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" id="email" autoComplete="email" required />
+        </div>
 
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" required/>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" id="password" autoComplete="new-password" required />
+        </div>
 
-        <button type="submit">Register</button>
+        <div>
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" autoComplete="new-password" required />
+        </div>
 
-        <p>Already have an account? <Link to="/login">Login</Link></p>
+        <div>
+          <label htmlFor="region">Region</label>
+          <select name="region" id="region" required>
+            <option value="">Select your region</option>
+            {REGIONS.map((region) => (
+              <option key={region.value} value={region.value}>
+                {region.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
+        <div>
+          <label htmlFor="role">I am...</label>
+          <select name="role" id="role" required>
+            <option value="">Select your role</option>
+            {ROLES.map((role) => (
+              <option key={role.value} value={role.value}>
+                {role.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
+        <fieldset>
+          <legend>I am...</legend>
+          {ROLES.map((role) => (
+            <label key={role.value}>
+              <input type="radio" name="role" value={role.value} required />
+              {role.label}
+            </label>
+          ))}
+        </fieldset>
 
+        <div>
+          <label>
+            <input type="checkbox" name="terms" required />
+            I agree to the terms and conditions
+          </label>
+        </div>
 
+        <button type="submit">Create account</button>
+      </form>
 
-
-        
-        </form>
-
-
-
+      <p>
+        Already have an account? <Link to="/login">Log in</Link>
+      </p>
     </main>
-  
-    
-
-    </>
-
-  )
-  
-  
-  
-  
+  );
 }
 
 export default RegisterPage;
