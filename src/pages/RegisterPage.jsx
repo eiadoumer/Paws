@@ -51,15 +51,7 @@ function RegisterPage() {
           </select>
         </div>
 
-        <fieldset>
-          <legend>I am...</legend>
-          {ROLES.map((role) => (
-            <label key={role.value}>
-              <input type="radio" name="role" value={role.value} required />
-              {role.label}
-            </label>
-          ))}
-        </fieldset>
+      
 
         <div>
           <label>
