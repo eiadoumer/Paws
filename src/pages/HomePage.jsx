@@ -22,7 +22,7 @@ function HomePage() {
   const featuredPets = getFeaturedPets(data.pets);
 
   return (
-    <main className="bg-warm-white text-navy">
+    <main className="bg-cream text-navy">
       <section className="bg-peach px-4 py-14 sm:py-20">
         <div className="mx-auto max-w-5xl">
           <p className="flex items-center gap-2 font-semibold">
@@ -38,13 +38,13 @@ function HomePage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/pets"
-              className="rounded-lg bg-navy px-6 py-3 text-center font-semibold text-warm-white hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+              className="rounded-lg bg-navy px-6 py-3 text-center font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
             >
               Browse pets
             </Link>
             <Link
               to="/register"
-              className="rounded-lg border border-navy px-6 py-3 text-center font-semibold text-navy hover:bg-warm-white focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+              className="rounded-lg border border-navy px-6 py-3 text-center font-semibold text-navy hover:bg-cream focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
             >
               Create an account
             </Link>

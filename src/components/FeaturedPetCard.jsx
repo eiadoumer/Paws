@@ -3,7 +3,7 @@ import { Link } from "react-router";
 // Summary card for one pet. The parent looks up the labels and passes them in as props.
 function FeaturedPetCard({ id, name, speciesLabel, age, regionLabel, description, imageUrl, imageAlt }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-navy/10 bg-warm-white shadow-sm">
+    <article className="flex flex-col overflow-hidden rounded-2xl border border-navy/10 bg-cream shadow-sm">
       <img src={imageUrl} alt={imageAlt} className="h-44 w-full bg-peach object-cover" />
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-xl font-bold text-navy">{name}</h3>

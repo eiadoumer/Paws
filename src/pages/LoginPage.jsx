@@ -64,7 +64,7 @@ function LoginPage() {
 
   return (
     <main className="min-h-screen bg-peach px-4 py-8 sm:flex sm:items-center sm:justify-center sm:py-12">
-      <div className="mx-auto w-full max-w-md rounded-2xl bg-warm-white p-5 shadow-sm sm:p-8">
+      <div className="mx-auto w-full max-w-md rounded-2xl bg-cream p-5 shadow-sm sm:p-8">
         <PawIcon className="size-8 text-coral" />
         <h1 className="mt-2 text-2xl font-bold tracking-tight text-navy sm:text-3xl">Welcome back</h1>
         <p className="mt-1 text-sm text-navy/80">Log in to continue your adoption journey.</p>
@@ -124,7 +124,7 @@ function LoginPage() {
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-navy px-4 py-3 text-base font-semibold text-warm-white hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+            className="w-full rounded-lg bg-navy px-4 py-3 text-base font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
           >
             Log in
           </button>
