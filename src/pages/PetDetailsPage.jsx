@@ -1,24 +1,15 @@
-import { Link, useLocation } from "react-router";
+import { Link, useParams } from "react-router";
 import { SPECIES, SIZES, REGIONS } from "../data/constants";
+import { mockPets, mockShelters } from "../data/mockData";
+import { getPetAgeLabel } from "../data/selectors";
 
 /*
-  NOTE: The pet's details come from PetListPage.
+  Shows one pet, looked up by the id in the URL (/pets/:id).
+  Reading the id from the URL means refreshing the page or opening
+  a shared link works, not only clicking a card in the pet list.
 
-  PetListPage should link to this page and pass the whole pet object
-  through the router's `state`, like this:
-
-    <Link to={`/pets/${pet.id}`} state={{ pet }}>
-      {pet.name}
-    </Link>
-
-  This page then reads it with useLocation().state.pet.
-
-  Expected pet fields (optional ones are hidden if missing):
-    id, name, species, breed, age, sex, size, region, status,
-    description, imageUrl, shelterId, shelterName
-
-  If someone opens /pets/:id directly or refreshes the page, there is no
-  state, so we show a "go back to the list" message instead.
+  Later, when PetsContext exists, read `pets` and `shelters` from it
+  instead of the mock arrays so newly added pets show up too.
 */
 
 // Turn a stored value like "mount-lebanon" into its label "Mount Lebanon".
@@ -29,29 +20,27 @@ function getLabel(list, value) {
 
 // Badge colors for each pet status.
 const STATUS_STYLES = {
-  available: "bg-[#FFE8DC] text-[#29344F]",
-  pending: "bg-[#D9785D] text-white",
-  adopted: "bg-gray-200 text-gray-600",
+  available: "bg-primary-500/15 text-primary-800 dark:text-primary-500",
+  pending: "bg-primary-700 text-white",
+  adopted: "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200",
 };
 
 function PetDetailsPage() {
-  const location = useLocation();
-  const pet = location.state?.pet;
+  const { id } = useParams();
+  const pet = mockPets.find((p) => p.id === id);
 
-  // No pet passed from PetListPage (direct visit or refresh).
+  // Unknown id in the URL.
   if (!pet) {
     return (
-      <main className="min-h-screen bg-[#FFFCF8] flex items-center justify-center p-6">
-        <div className="bg-[#FFE8DC] rounded-2xl p-8 text-center max-w-md">
-          <h1 className="text-2xl font-bold text-[#29344F] mb-2">
-            Pet not found
-          </h1>
-          <p className="text-[#29344F]/80 mb-6">
+      <main className="flex min-h-screen items-center justify-center bg-gray-50 p-6 dark:bg-gray-950">
+        <div className="max-w-md rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
+          <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">Pet not found</h1>
+          <p className="mb-6 text-gray-600 dark:text-gray-400">
             Please choose a pet from the list to see their details.
           </p>
           <Link
             to="/pets"
-            className="inline-block bg-[#29344F] text-white font-semibold px-6 py-3 rounded-full hover:opacity-90"
+            className="inline-block rounded-full bg-primary-700 px-6 py-3 font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
           >
             Browse pets
           </Link>
@@ -60,6 +49,7 @@ function PetDetailsPage() {
     );
   }
 
+  const shelter = mockShelters.find((s) => s.id === pet.shelterId);
   const status = pet.status || "available";
   const isAvailable = status === "available";
 
@@ -67,52 +57,48 @@ function PetDetailsPage() {
   const facts = [
     { label: "Species", value: pet.species && getLabel(SPECIES, pet.species) },
     { label: "Breed", value: pet.breed },
-    { label: "Age", value: pet.age },
+    { label: "Age", value: getPetAgeLabel(pet.ageMonths) },
     { label: "Sex", value: pet.sex },
     { label: "Size", value: pet.size && getLabel(SIZES, pet.size) },
     { label: "Region", value: pet.region && getLabel(REGIONS, pet.region) },
   ].filter((fact) => fact.value);
 
   return (
-    <main className="min-h-screen bg-[#FFFCF8] px-4 py-8 sm:px-8">
-      <div className="max-w-5xl mx-auto">
+    <main className="min-h-screen bg-gray-50 px-4 py-8 sm:px-8 dark:bg-gray-950">
+      <div className="mx-auto max-w-5xl">
         {/* py-2 gives the link a bigger tap area on phones */}
         <Link
           to="/pets"
-          className="inline-flex items-center gap-1 py-2 text-[#29344F] font-medium mb-4 sm:mb-6 hover:text-[#D9785D]"
+          className="mb-4 inline-flex items-center gap-1 py-2 font-medium text-gray-700 hover:text-primary-700 sm:mb-6 dark:text-gray-300 dark:hover:text-primary-500"
         >
           ← Back to all pets
         </Link>
 
         {/* Phones: photo on top, info below. Tablets and up: side by side. */}
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2 md:items-start">
+        <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-8">
           {/* Photo: shorter (4:3) on phones so the info is visible sooner, square on bigger screens */}
-          <div className="rounded-2xl overflow-hidden bg-[#FFE8DC] aspect-[4/3] md:aspect-square">
+          <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-primary-500/15 md:aspect-square">
             {pet.imageUrl ? (
-              <img
-                src={pet.imageUrl}
-                alt={pet.name}
-                className="w-full h-full object-cover"
-              />
+              <img src={pet.imageUrl} alt={pet.imageAlt || pet.name} className="h-full w-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-7xl">
+              <div className="flex h-full w-full items-center justify-center text-7xl" aria-hidden="true">
                 🐾
               </div>
             )}
           </div>
 
           {/* Info card */}
-          <div className="bg-[#FFFCF8] rounded-2xl border border-[#FFE8DC] shadow-sm p-5 sm:p-8 flex flex-col">
+          <div className="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:p-8 dark:bg-gray-800 dark:ring-gray-700">
             <div className="flex items-start justify-between gap-3">
               {/* min-w-0 + break-words stop long names from pushing the badge off screen */}
               <div className="min-w-0">
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#29344F] break-words">
+                <h1 className="break-words text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">
                   {pet.name}
                 </h1>
-                <div className="h-1 w-12 bg-[#D9785D] rounded-full mt-3" />
+                <div className="mt-3 h-1 w-12 rounded-full bg-primary-600" />
               </div>
               <span
-                className={`shrink-0 px-3 py-1 rounded-full text-sm font-semibold capitalize ${
+                className={`shrink-0 rounded-full px-3 py-1 text-sm font-semibold capitalize ${
                   STATUS_STYLES[status] || STATUS_STYLES.available
                 }`}
               >
@@ -121,15 +107,13 @@ function PetDetailsPage() {
             </div>
 
             {facts.length > 0 && (
-              <dl className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
+              <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3">
                 {facts.map((fact) => (
-                  <div key={fact.label} className="bg-[#FFE8DC] rounded-xl p-3">
-                    <dt className="text-xs uppercase tracking-wide text-[#D9785D] font-semibold">
+                  <div key={fact.label} className="rounded-xl bg-gray-100 p-3 dark:bg-gray-700/60">
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-primary-700 dark:text-primary-500">
                       {fact.label}
                     </dt>
-                    <dd className="text-[#29344F] font-medium capitalize">
-                      {fact.value}
-                    </dd>
+                    <dd className="font-medium capitalize text-gray-900 dark:text-gray-100">{fact.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -137,23 +121,19 @@ function PetDetailsPage() {
 
             {pet.description && (
               <div className="mt-6">
-                <h2 className="text-xl font-semibold text-[#29344F] mb-2">
-                  About {pet.name}
-                </h2>
-                <p className="text-[#29344F]/80 leading-relaxed">
-                  {pet.description}
-                </p>
+                <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">About {pet.name}</h2>
+                <p className="leading-relaxed text-gray-700 dark:text-gray-300">{pet.description}</p>
               </div>
             )}
 
-            {pet.shelterId && (
-              <p className="mt-6 text-[#29344F]/80">
+            {shelter && (
+              <p className="mt-6 text-gray-700 dark:text-gray-300">
                 Cared for by{" "}
                 <Link
-                  to={`/shelters/${pet.shelterId}`}
-                  className="font-semibold text-[#29344F] underline decoration-[#D9785D] underline-offset-4 hover:text-[#D9785D]"
+                  to={`/shelters/${shelter.id}`}
+                  className="font-semibold text-gray-900 underline decoration-primary-600 underline-offset-4 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
                 >
-                  {pet.shelterName || "this shelter"}
+                  {shelter.name}
                 </Link>
               </p>
             )}
@@ -165,7 +145,7 @@ function PetDetailsPage() {
               <button
                 type="button"
                 disabled={!isAvailable}
-                className="w-full bg-[#29344F] text-white font-semibold py-4 md:py-3 rounded-full shadow-lg md:shadow-none hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full rounded-full bg-primary-700 py-4 font-semibold text-white shadow-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 md:py-3 md:shadow-none dark:focus:ring-offset-gray-800"
               >
                 {isAvailable ? `Adopt ${pet.name}` : `${pet.name} is ${status}`}
               </button>
