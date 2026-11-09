@@ -1,8 +1,4 @@
 // Shared lists of allowed values.
-// Import these instead of typing the strings by hand, so every page uses the same values.
-// `value` is what gets saved in the data, `label` is what users see.
-
-// TODO: replace with the regions the team agrees on.
 export const REGIONS = [
   { value: 'north', label: 'North' },
   { value: 'south', label: 'South' },
