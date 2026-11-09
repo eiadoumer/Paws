@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { REGIONS, ROLES } from "../data/constants.js";
-import { users } from "../data/users.js";
+import { mockUsers as users } from "../data/mockData.js";
 
 // Shared Tailwind classes, written once so every field looks the same.
 // Mobile first: base classes are for phones, sm:/md: add tweaks for bigger screens.
