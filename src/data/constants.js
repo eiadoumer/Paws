@@ -1,10 +1,15 @@
 // Shared lists of allowed values.
+
+// Lebanon's 8 governorates (muhafazat).
 export const REGIONS = [
+  { value: 'beirut', label: 'Beirut' },
+  { value: 'mount-lebanon', label: 'Mount Lebanon' },
   { value: 'north', label: 'North' },
+  { value: 'akkar', label: 'Akkar' },
+  { value: 'beqaa', label: 'Beqaa' },
+  { value: 'baalbek-hermel', label: 'Baalbek-Hermel' },
   { value: 'south', label: 'South' },
-  { value: 'east', label: 'East' },
-  { value: 'west', label: 'West' },
-  { value: 'central', label: 'Central' },
+  { value: 'nabatieh', label: 'Nabatieh' },
 ];
 
 export const SPECIES = [
