@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import FilterBar from "../components/FilterBar.jsx";
 import PetCard from "../components/PetCard.jsx";
 import { useAppData } from "../context/AppDataContext.jsx";
@@ -53,10 +53,21 @@ function PetListPage() {
   return (
     <main className="min-h-screen bg-cream px-4 py-8 sm:px-8 dark:bg-gray-950">
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-3xl font-bold text-navy sm:text-4xl dark:text-white">Find your new friend</h1>
-        <p className="mt-2 text-navy/70 dark:text-gray-400">
-          Browse pets waiting for a home across Lebanon.
-        </p>
+        {/* Phones: shelters button under the heading. Bigger screens: on the right. */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-navy sm:text-4xl dark:text-white">Find your new friend</h1>
+            <p className="mt-2 text-navy/70 dark:text-gray-400">
+              Browse pets waiting for a home across Lebanon.
+            </p>
+          </div>
+          <Link
+            to="/shelters"
+            className="shrink-0 rounded-full bg-navy px-6 py-3 text-center font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 dark:focus:ring-offset-gray-950"
+          >
+            View our shelters
+          </Link>
+        </div>
 
         <button
           type="button"

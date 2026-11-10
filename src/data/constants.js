@@ -39,5 +39,8 @@ export const AGE_GROUPS = [
   { value: 'senior', label: 'Senior (8+ years)', min: 96, max: Infinity },
 ];
 
+// Shown for a shelter that hasn't listed its own opening hours.
+export const DEFAULT_OPENING_HOURS = ['Every day: 09:00–19:00'];
+
 export const PET_STATUS = ['available', 'pending', 'adopted'];
 export const REQUEST_STATUS = ['pending', 'approved', 'rejected'];

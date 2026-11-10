@@ -3,7 +3,7 @@ import PawIcon from "../components/PawIcon.jsx";
 import PetCard from "../components/PetCard.jsx";
 import { useAppData } from "../context/AppDataContext.jsx";
 import { REGIONS } from "../data/constants.js";
-import { getPetsByShelter } from "../data/selectors.js";
+import { getOpeningHours, getPetsByShelter, splitHours } from "../data/selectors.js";
 
 /*
   Shows one shelter, looked up by the id in the URL (/shelters/:id),
@@ -17,12 +17,6 @@ import { getPetsByShelter } from "../data/selectors.js";
 // Turn a stored value like "mount-lebanon" into its label "Mount Lebanon".
 function getLabel(list, value) {
   return list.find((item) => item.value === value)?.label ?? value;
-}
-
-// Split "Monday–Friday: 10:00–17:00" into ["Monday–Friday", "10:00–17:00"].
-function splitHours(line) {
-  const index = line.indexOf(": ");
-  return index === -1 ? [line, ""] : [line.slice(0, index), line.slice(index + 2)];
 }
 
 // Shared look for the white cards on this page.
@@ -71,7 +65,7 @@ function ShelterDetailsPage() {
     { label: "Available", value: availablePets.length },
   ].filter((fact) => fact.value || fact.value === 0);
 
-  const hours = shelter.openingHours || [];
+  const hours = getOpeningHours(shelter);
   const hasContact = shelter.address || shelter.phone || shelter.email;
 
   return (

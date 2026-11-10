@@ -43,6 +43,12 @@ function HomePage() {
               Browse pets
             </Link>
             <Link
+              to="/shelters"
+              className="rounded-lg border border-navy px-6 py-3 text-center font-semibold text-navy hover:bg-cream focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+            >
+              View our shelters
+            </Link>
+            <Link
               to="/register"
               className="rounded-lg border border-navy px-6 py-3 text-center font-semibold text-navy hover:bg-cream focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
             >
