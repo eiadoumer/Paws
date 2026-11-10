@@ -63,7 +63,7 @@ function PetListPage() {
           </div>
           <Link
             to="/shelters"
-            className="shrink-0 rounded-full bg-navy px-6 py-3 text-center font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 dark:focus:ring-offset-gray-950"
+            className="shrink-0 rounded-full bg-navy px-6 py-3 text-center font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 dark:focus:ring-offset-gray-950"
           >
             View our shelters
           </Link>
@@ -112,7 +112,7 @@ function PetListPage() {
             <button
               type="button"
               onClick={clearFilters}
-              className="mt-5 rounded-full bg-navy px-6 py-3 font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+              className="mt-5 rounded-full bg-navy px-6 py-3 font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
             >
               Clear filters
             </button>

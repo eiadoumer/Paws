@@ -117,7 +117,7 @@ function ShelterListPage() {
                   <div className="mt-auto pt-6">
                     <Link
                       to={`/shelters/${shelter.id}`}
-                      className="block rounded-full bg-navy py-3 text-center font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                      className="block rounded-full bg-navy py-3 text-center font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                     >
                       View shelter and animals
                     </Link>
