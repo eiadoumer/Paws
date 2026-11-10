@@ -31,5 +31,13 @@ export const ROLES = [
   { value: 'shelter', label: "I'm a shelter" },
 ];
 
+// Age filter groups, by age in whole months (min and max are inclusive).
+export const AGE_GROUPS = [
+  { value: 'baby', label: 'Baby (under 1 year)', min: 0, max: 11 },
+  { value: 'young', label: 'Young (1–2 years)', min: 12, max: 35 },
+  { value: 'adult', label: 'Adult (3–7 years)', min: 36, max: 95 },
+  { value: 'senior', label: 'Senior (8+ years)', min: 96, max: Infinity },
+];
+
 export const PET_STATUS = ['available', 'pending', 'adopted'];
 export const REQUEST_STATUS = ['pending', 'approved', 'rejected'];
