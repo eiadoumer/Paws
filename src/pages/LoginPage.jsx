@@ -8,8 +8,15 @@ const labelClass = "mb-1.5 block text-sm font-medium text-navy";
 const inputClass =
   "block w-full rounded-lg border border-navy/30 bg-white px-3 py-2.5 text-base text-navy " +
   "placeholder:text-navy/50 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/30 " +
-  "aria-[invalid=true]:border-red-600 aria-[invalid=true]:focus:ring-red-600/30";
+  "aria-[invalid=true]:border-red-600 aria-[invalid=true]:focus:ring-red-600/30 " +
+  "dark:bg-gray-900";
 const errorClass = "mt-1.5 text-sm text-red-700";
+
+// One-click demo logins, so testers don't have to type the sample emails and password.
+const DEMO_ACCOUNTS = [
+  { email: "alex@example.com", label: "Adopter", hint: "Alex Morgan" },
+  { email: "central@example.com", label: "Shelter", hint: "Central Paws Rescue" },
+];
 
 // Checks the form values and returns an object of error messages.
 // An empty object means the form is valid.
@@ -58,6 +65,17 @@ function LoginPage() {
       return;
     }
 
+    setData((previous) => ({ ...previous, currentUserId: user.id }));
+    navigate("/dashboard");
+  }
+
+  // Logs straight in as one of the demo accounts.
+  function logInAsDemo(email) {
+    const user = data.users.find((candidate) => candidate.email === email);
+    if (!user) {
+      setLoginError("That demo account isn't available");
+      return;
+    }
     setData((previous) => ({ ...previous, currentUserId: user.id }));
     navigate("/dashboard");
   }
@@ -129,6 +147,27 @@ function LoginPage() {
             Log in
           </button>
         </form>
+
+        <div className="mt-6">
+          <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-navy/60">
+            <span className="h-px flex-1 bg-navy/15" aria-hidden="true" />
+            Or try a demo account
+            <span className="h-px flex-1 bg-navy/15" aria-hidden="true" />
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {DEMO_ACCOUNTS.map((account) => (
+              <button
+                key={account.email}
+                type="button"
+                onClick={() => logInAsDemo(account.email)}
+                className="rounded-lg border border-navy/20 px-4 py-3 text-left hover:border-coral hover:bg-peach focus:outline-none focus:ring-2 focus:ring-coral"
+              >
+                <span className="block font-semibold text-navy">Log in as {account.label}</span>
+                <span className="block text-sm text-navy/70">{account.hint}</span>
+              </button>
+            ))}
+          </div>
+        </div>
 
         <p className="mt-6 text-center text-sm text-navy/80">
           New to Paws?{" "}

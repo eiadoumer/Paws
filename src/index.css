@@ -13,3 +13,18 @@
   --color-primary-700: #29344F; /* navy: main buttons and labels */
   --color-primary-800: #1E2639; /* darker navy: button hover */
 }
+
+/* Dark mode (the ThemeToggle adds the "dark" class to <html>).
+   Re-pointing the palette makes every bg-cream, bg-peach and text-navy flip automatically,
+   so pages that only use the palette work in dark mode without extra dark: classes. */
+.dark {
+  --color-cream: #111827; /* page backgrounds and cards */
+  --color-peach: #1F2937; /* highlighted sections */
+  --color-navy: #E5E7EB;  /* text and main buttons */
+  color-scheme: dark;     /* dark scrollbars and form controls */
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-navy);
+}
