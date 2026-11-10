@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import { SPECIES, SIZES, REGIONS } from "../data/constants";
-import { mockPets, mockShelters, mockUsers } from "../data/mockData";
+import { mockPets, mockShelters } from "../data/mockData";
 import { getPetAgeLabel } from "../data/selectors";
 
 /*
@@ -50,8 +50,6 @@ function PetDetailsPage() {
   }
 
   const shelter = mockShelters.find((s) => s.id === pet.shelterId);
-  // Pets posted by a person instead of a shelter show that person's contact details.
-  const owner = shelter ? null : mockUsers.find((u) => u.id === pet.ownerId);
   const status = pet.status || "available";
   const isAvailable = status === "available";
 
@@ -138,40 +136,6 @@ function PetDetailsPage() {
                   {shelter.name}
                 </Link>
               </p>
-            )}
-
-            {owner && (
-              <div className="mt-6 rounded-xl bg-gray-100 p-4 dark:bg-gray-700/60">
-                <p className="text-xs font-semibold uppercase tracking-wide text-primary-700 dark:text-primary-500">
-                  Listed by
-                </p>
-                <p className="font-semibold text-gray-900 dark:text-white">{owner.name}</p>
-                <ul className="mt-2 space-y-1 text-gray-700 dark:text-gray-300">
-                  {owner.phone && (
-                    <li>
-                      Phone:{" "}
-                      {/* Spaces are removed so phones can dial the number */}
-                      <a
-                        href={`tel:${owner.phone.replace(/\s/g, "")}`}
-                        className="inline-block py-1 font-medium text-gray-900 underline decoration-primary-600 underline-offset-4 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
-                      >
-                        {owner.phone}
-                      </a>
-                    </li>
-                  )}
-                  {owner.email && (
-                    <li>
-                      Email:{" "}
-                      <a
-                        href={`mailto:${owner.email}`}
-                        className="inline-block break-all py-1 font-medium text-gray-900 underline decoration-primary-600 underline-offset-4 hover:text-primary-700 dark:text-white dark:hover:text-primary-500"
-                      >
-                        {owner.email}
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              </div>
             )}
 
             {/* Adoption request logic can be hooked up to this button later.
