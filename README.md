@@ -11,7 +11,7 @@ This is **Phase 1** of a university group project. Phase 1 is the front end only
 | Eyad Oumar | Pet List, Register form |
 | Omar Bacha | Home page, Login page |
 | Kareem Mobayed | Pet Details page, Shelter Details page |
-| Shawki EL Ghandour | Dashboard page, Add/Edit forms for pets and shelters |
+| Shawki EL Ghandour | Dashboard page, Add/Edit pet form |
 
 ## Topic and data
 
@@ -88,6 +88,15 @@ All demo accounts use the password **`PawsDemo123!`**
 **Shelter Details**
 ![Shelter details page for Central Paws Rescue](docs/screenshots/shelter-details.png)
 
+**Dashboard**
+![Dashboard with the user's pet listings](docs/screenshots/dashboard.png)
+
+**Add a pet**
+![Form to list a new pet](docs/screenshots/pet-form-add.png)
+
+**Edit a pet**
+![Form to edit Maple's listing](docs/screenshots/pet-form-edit.png)
+
 **Register**
 ![Register form](docs/screenshots/register.png)
 
@@ -114,9 +123,10 @@ All demo accounts use the password **`PawsDemo123!`**
 - **Pet Details** (`/pets/:id`): one pet's photo, facts (species, breed, age, sex, size, region), description, its shelter, and an adopt button that is disabled if the pet is not available.
 - **Shelter Details** (`/shelters/:id`): one shelter's information and the pets it cares for.
 
-### Shawki EL Ghandour: Dashboard and Add/Edit forms
-- **Dashboard** (`/dashboard`): the logged-in user's own page. Shelters see their pet listings and the adoption requests they received. Adopters see the requests they sent.
-- **Add/Edit forms** (`/pets/new`): forms to add a new pet or change an existing one, with checks on every field.
+### Shawki EL Ghandour: Dashboard and Add/Edit pet form
+- **Dashboard** (`/dashboard`): the user's own page, with three tabs. **My listings** shows the pets they listed, with a search box, a status filter, and View, Edit and Delete buttons. **My requests** shows the adoption requests they sent. **Received requests** shows requests for their pets, with Approve and Reject buttons. Approving a request marks the pet as adopted. Counters at the top show the number of listings, received requests and adopted pets.
+- **Add/Edit pet form** (`/pets/new` and `/pets/:id/edit`): one form to list a new pet or change an existing one. Required fields are checked before saving, and you can only edit your own listings.
+- For now, the dashboard and the form always use the demo account (Alex), not the account that logged in.
 
 ## How the mock data works
 
