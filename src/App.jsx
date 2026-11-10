@@ -12,6 +12,7 @@ import ShelterListPage from "./pages/ShelterListPage"
 import DashboardPage from "./pages/DashboardPage"
 
 import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
 
 
@@ -36,6 +37,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    <Footer />
 </>
   )
 }

@@ -42,7 +42,7 @@ function ShelterDetailsPage() {
           </p>
           <Link
             to="/pets"
-            className="inline-block rounded-full bg-navy px-6 py-3 font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+            className="inline-block rounded-full bg-navy px-6 py-3 font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
           >
             Browse pets
           </Link>
@@ -144,7 +144,7 @@ function ShelterDetailsPage() {
               <div className="sticky bottom-4 mt-8 md:static">
                 <a
                   href="#animals"
-                  className="block w-full rounded-full bg-navy py-4 text-center font-semibold text-white shadow-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 md:py-3 md:shadow-none dark:focus:ring-offset-gray-800"
+                  className="block w-full rounded-full bg-navy py-4 text-center font-semibold text-cream shadow-lg hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 md:py-3 md:shadow-none dark:focus:ring-offset-gray-800"
                 >
                   See our {animals.length} {animals.length === 1 ? "animal" : "animals"}
                 </a>
@@ -239,7 +239,7 @@ function ShelterDetailsPage() {
               </p>
               <Link
                 to="/pets"
-                className="mt-5 inline-block rounded-full bg-navy px-6 py-3 font-semibold text-white hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+                className="mt-5 inline-block rounded-full bg-navy px-6 py-3 font-semibold text-cream hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
               >
                 Browse all pets
               </Link>

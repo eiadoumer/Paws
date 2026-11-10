@@ -4,7 +4,7 @@ import { useAppData } from "../context/AppDataContext.jsx";
 import { DEMO_USER_ID } from "../data/mockData.js";
 
 const pill = "rounded-full px-3 py-1 text-xs font-semibold capitalize bg-primary-500/15 text-navy dark:text-white";
-const button = "rounded-full bg-navy px-5 py-2 font-semibold text-white hover:opacity-90";
+const button = "rounded-full bg-navy px-5 py-2 font-semibold text-cream hover:opacity-90";
 
 export default function DashboardPage() {
   const { data, setData } = useAppData();
@@ -68,7 +68,7 @@ export default function DashboardPage() {
         <div className="mt-8 flex flex-wrap gap-2">
           {[["listings", "My listings"], ["sent", "My requests"], ["received", "Received requests"]].map(([key, label]) => (
             <button key={key} type="button" onClick={() => setTab(key)}
-              className={`rounded-full px-5 py-3 font-semibold ${tab === key ? "bg-navy text-white" : "bg-white text-navy dark:bg-gray-800 dark:text-white"}`}>{label}</button>
+              className={`rounded-full px-5 py-3 font-semibold ${tab === key ? "bg-navy text-cream" : "bg-white text-navy dark:bg-gray-800 dark:text-white"}`}>{label}</button>
           ))}
         </div>
         {tab === "listings" ? (

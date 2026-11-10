@@ -101,7 +101,7 @@ export default function PetFormPage() {
           <label className="flex items-center gap-2"><input type="checkbox" checked={form.neutered} onChange={(e) => update("neutered", e.target.checked)} /> Neutered</label>
           {error && <p role="alert" className="text-red-600 sm:col-span-2">{error}</p>}
           <div className="flex flex-wrap gap-3 sm:col-span-2">
-            <button type="submit" className="rounded-full bg-navy px-6 py-3 font-semibold text-white">{existing ? "Save changes" : "Publish listing"}</button>
+            <button type="submit" className="rounded-full bg-navy px-6 py-3 font-semibold text-cream">{existing ? "Save changes" : "Publish listing"}</button>
             <Link to="/dashboard" className="rounded-full border border-gray-300 px-6 py-3 font-semibold">Cancel</Link>
           </div>
         </form>
