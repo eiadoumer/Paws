@@ -100,8 +100,8 @@ To log in by hand, use one of these. All demo accounts use the password **`PawsD
 **Shelter Details**
 ![Shelter details page for Central Paws Rescue](docs/screenshots/shelter-details.png)
 
-**Dashboard**
-![Dashboard with the user's pet listings](docs/screenshots/dashboard.png)
+**Dashboard** (after logging in with "Log in as Adopter": the top bar now shows Dashboard, "Hi, Alex" and Log out)
+![Dashboard after logging in as Alex, showing his pet listings](docs/screenshots/dashboard.png)
 
 **Add a pet**
 ![Form to list a new pet](docs/screenshots/pet-form-add.png)
