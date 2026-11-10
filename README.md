@@ -1,6 +1,6 @@
 # Paws: Pet Adoption Network
 
-Paws is a website that helps people in Lebanon find a pet to adopt. You can browse pets, filter them, read about each pet and its shelter, and create an account as an adopter or as a shelter.
+Paws is a website that helps people in Lebanon find a pet to adopt. You can browse pets, filter them, read about each pet and its shelter, and create an account as an adopter or as a shelter. It works on phones and computers, and has a light and a dark mode.
 
 This is **Phase 1** of a university group project. Phase 1 is the front end only (what you see in the browser). There is no server or database yet, so the app uses pretend data that lives in the browser (see [How the mock data works](#how-the-mock-data-works)). The back end will be built with Node.js in Phase 2.
 
@@ -67,7 +67,9 @@ Regions are Lebanon's 8 governorates: Beirut, Mount Lebanon, North, Akkar, Beqaa
 | `npm run lint` | Checks the code for common mistakes. |
 
 ### Demo accounts
-All demo accounts use the password **`PawsDemo123!`**
+The quickest way in: on the Login page, click **Log in as Adopter** or **Log in as Shelter**. No typing needed.
+
+To log in by hand, use one of these. All demo accounts use the password **`PawsDemo123!`**
 
 | Email | Role |
 |---|---|
@@ -79,8 +81,14 @@ All demo accounts use the password **`PawsDemo123!`**
 **Home page**
 ![Home page](docs/screenshots/home.png)
 
+**Home page in dark mode** (switch with the moon button in the top bar)
+![Home page in dark mode](docs/screenshots/home-dark.png)
+
 **Pet List with filters** (here: dogs, large size)
 ![Pet list filtered to large dogs](docs/screenshots/pet-list-filtered.png)
+
+**Pet List in dark mode**
+![Pet list in dark mode](docs/screenshots/pet-list-dark.png)
 
 **Pet Details**
 ![Pet details page for Bruno](docs/screenshots/pet-details.png)
@@ -100,10 +108,13 @@ All demo accounts use the password **`PawsDemo123!`**
 **Register**
 ![Register form](docs/screenshots/register.png)
 
-**Login**
-![Login form](docs/screenshots/login.png)
+**Login** (with the one-click demo buttons)
+![Login form with demo account buttons](docs/screenshots/login.png)
 
-**Pet List on a phone**
+**Page not found**
+![Page not found](docs/screenshots/not-found.png)
+
+**Pet List on a phone** (the top bar turns into a menu button)
 
 <img src="docs/screenshots/pet-list-mobile.png" alt="Pet list on a phone screen" width="300">
 
@@ -112,7 +123,9 @@ All demo accounts use the password **`PawsDemo123!`**
 ### Eyad Oumar: Pet List and Register
 - **Pet List** (`/pets`): shows every pet as a card with a status badge. You can search by name or breed and filter by species, age, size, region and status. The filters are saved in the web address, so a filtered list can be shared, and the species links on the Home page open the list already filtered. It shows how many pets match, has a "Clear filters" button and a message when nothing matches. On phones, the filters hide behind a "Show filters" button.
 - **Register** (`/register`): a sign-up form for adopters and shelters. Every field is checked (for example, a valid email, a password with at least 8 characters including a letter and a number, matching passwords). Each error appears under its field. Choosing "I'm a shelter" shows extra shelter fields. There is a show/hide password button.
-- Also: the shared lists of allowed values (`constants.js`), the mock data and helper functions, and the paw favicon.
+- **Top bar and footer** (on every page): the top bar has the logo and links to Home, Browse pets and Shelters, and highlights the page you are on. It shows Log in and Register, or Dashboard and Log out once you are logged in. On phones, the links fold into a menu button. The footer has quick links, the team names and the copyright line.
+- **Dark mode**: a moon/sun button in the top bar switches the whole site between light and dark. It remembers your choice, and the first time it follows your device's setting.
+- Also: the one-click demo login buttons, the "Page not found" page, the shared lists of allowed values (`constants.js`), the mock data and helper functions, and the paw favicon.
 
 ### Omar Bacha: Home and Login
 - **Home** (`/`): the landing page with featured pets and quick links to browse pets by species.
@@ -156,7 +169,7 @@ In Phase 2, the starting data will come from a Node.js server instead. The pages
 
 ```
 public/images/      pet and shelter photos
-src/components/     reusable pieces (Navbar, PetCard, FilterBar, ...)
+src/components/     reusable pieces (Navbar, Footer, ThemeToggle, PetCard, FilterBar, ...)
 src/context/        the shared data provider
 src/data/           mock data, allowed values and helper functions
 src/pages/          one file per page
