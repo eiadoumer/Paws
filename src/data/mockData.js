@@ -7,7 +7,7 @@ export const DEMO_PASSWORD = 'PawsDemo123!';
 const SHELTER_IMAGE = '/images/shelters/Animal-shelter.jpg';
 
 export const mockUsers = [
-  { id: 'user-001', name: 'Alex Morgan', email: 'alex@example.com', password: DEMO_PASSWORD, role: 'adopter', shelterId: null, region: 'mount-lebanon', phone: '+961 70 555 101', bio: 'I foster pets and am looking for a companion for my family.', createdAt: '2026-09-01T09:00:00Z' },
+  { id: 'user-001', name: 'Alex', email: 'alex@example.com', password: DEMO_PASSWORD, role: 'adopter', shelterId: null, region: 'mount-lebanon', phone: '+961 70 555 101', bio: 'I foster pets and am looking for a companion for my family.', createdAt: '2026-09-01T09:00:00Z' },
   { id: 'user-002', name: 'Sam Rivera', email: 'sam@example.com', password: DEMO_PASSWORD, role: 'adopter', shelterId: null, region: 'beqaa', phone: '+961 70 555 102', bio: 'An experienced dog owner with a quiet home and a fenced garden.', createdAt: '2026-09-03T10:00:00Z' },
   { id: 'user-003', name: 'Taylor Reed', email: 'taylor@example.com', password: DEMO_PASSWORD, role: 'adopter', shelterId: null, region: 'mount-lebanon', phone: '+961 70 555 103', bio: 'A cat lover who also helps small animals find homes.', createdAt: '2026-09-05T11:00:00Z' },
   { id: 'user-004', name: 'Jordan Lee', email: 'central@example.com', password: DEMO_PASSWORD, role: 'shelter', shelterId: 'shelter-001', region: 'beirut', phone: '+961 1 555 104', bio: 'Adoption coordinator at Central Paws Rescue.', createdAt: '2026-09-02T08:00:00Z' },

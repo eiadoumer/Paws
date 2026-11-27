@@ -1,5 +1,5 @@
 
-import { Route,Routes } from "react-router"
+import { Route,Routes, useLocation } from "react-router"
 import HomePage from "./pages/HomePage"
 import PetListPage from "./pages/PetListPage"
 import PetDetailsPage from "./pages/PetDetailsPage"
@@ -19,6 +19,8 @@ import Footer from "./components/Footer"
 
 
 function App() {
+  const { pathname } = useLocation();
+  const workspace = /^\/dashboard\/?$/.test(pathname) || /^\/pets\/new\/?$/.test(pathname) || /^\/pets\/[^/]+\/edit\/?$/.test(pathname);
   return (
     <>
     <Navbar />
@@ -37,7 +39,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-    <Footer />
+    {!workspace && <Footer />}
 </>
   )
 }

@@ -1,16 +1,10 @@
 import { Link, useParams } from "react-router";
 import { SPECIES, SIZES, REGIONS } from "../data/constants";
-import { mockPets, mockShelters } from "../data/mockData";
+import { useAppData } from "../context/AppDataContext.jsx";
+import AdoptionRequestForm from "../components/AdoptionRequestForm.jsx";
 import { getPetAgeLabel } from "../data/selectors";
 
-/*
-  Shows one pet, looked up by the id in the URL (/pets/:id).
-  Reading the id from the URL means refreshing the page or opening
-  a shared link works, not only clicking a card in the pet list.
 
-  Later, when PetsContext exists, read `pets` and `shelters` from it
-  instead of the mock arrays so newly added pets show up too.
-*/
 
 // Turn a stored value like "mount-lebanon" into its label "Mount Lebanon".
 function getLabel(list, value) {
@@ -27,7 +21,8 @@ const STATUS_STYLES = {
 
 function PetDetailsPage() {
   const { id } = useParams();
-  const pet = mockPets.find((p) => p.id === id);
+  const { data } = useAppData();
+  const pet = data.pets.find((p) => p.id === id);
 
   // Unknown id in the URL.
   if (!pet) {
@@ -49,9 +44,8 @@ function PetDetailsPage() {
     );
   }
 
-  const shelter = mockShelters.find((s) => s.id === pet.shelterId);
+  const shelter = data.shelters.find((s) => s.id === pet.shelterId);
   const status = pet.status || "available";
-  const isAvailable = status === "available";
 
   // Only show facts the pet actually has.
   const facts = [
@@ -138,18 +132,7 @@ function PetDetailsPage() {
               </p>
             )}
 
-            {/* Adoption request logic can be hooked up to this button later.
-                On phones the button sticks to the bottom of the screen while
-                scrolling the card, so it's always within thumb reach. */}
-            <div className="sticky bottom-4 mt-8 md:static">
-              <button
-                type="button"
-                disabled={!isAvailable}
-                className="w-full rounded-full bg-primary-700 py-4 font-semibold text-white shadow-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 md:py-3 md:shadow-none dark:focus:ring-offset-gray-800"
-              >
-                {isAvailable ? `Adopt ${pet.name}` : `${pet.name} is ${status}`}
-              </button>
-            </div>
+            <AdoptionRequestForm pet={pet} />
           </div>
         </div>
       </div>

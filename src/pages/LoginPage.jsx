@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import PawIcon from "../components/PawIcon.jsx";
 import { useAppData } from "../context/AppDataContext.jsx";
 
@@ -14,7 +14,7 @@ const errorClass = "mt-1.5 text-sm text-red-700";
 
 // One-click demo logins, so testers don't have to type the sample emails and password.
 const DEMO_ACCOUNTS = [
-  { email: "alex@example.com", label: "Adopter", hint: "Alex Morgan" },
+  { email: "alex@example.com", label: "Adopter", hint: "Alex" },
   { email: "central@example.com", label: "Shelter", hint: "Central Paws Rescue" },
 ];
 
@@ -33,6 +33,9 @@ function validate(values) {
 
 function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from;
+  const destination = typeof from === "string" && from.startsWith("/") && !from.startsWith("//") ? from : "/dashboard";
   const { data, setData } = useAppData();
 
   const [form, setForm] = useState({ email: "", password: "" });
@@ -66,7 +69,7 @@ function LoginPage() {
     }
 
     setData((previous) => ({ ...previous, currentUserId: user.id }));
-    navigate("/dashboard");
+    navigate(destination);
   }
 
   // Logs straight in as one of the demo accounts.
@@ -77,7 +80,7 @@ function LoginPage() {
       return;
     }
     setData((previous) => ({ ...previous, currentUserId: user.id }));
-    navigate("/dashboard");
+    navigate(destination);
   }
 
   return (

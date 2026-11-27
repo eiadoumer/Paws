@@ -1,0 +1,81 @@
+{
+  "checks": [
+    {
+      "name": "Guest Home hides workspace controls and dashboard button",
+      "passed": true
+    },
+    {
+      "name": "Real Login opens approved Dashboard with current Alex profile",
+      "passed": true
+    },
+    {
+      "name": "Dark and light theme toggle, Back to home, centered navy Dashboard button",
+      "passed": true
+    },
+    {
+      "name": "Edit listing updates real Details and toast disappears after two seconds",
+      "passed": true
+    },
+    {
+      "name": "Add listing, button-only upload, shared Browse/Details, delete confirmation",
+      "passed": true
+    },
+    {
+      "name": "Adoption request crosses adopter and lister dashboards; approval updates Details",
+      "passed": true
+    },
+    {
+      "name": "Registration saves a real shared account, supports logout and subsequent login",
+      "passed": true
+    },
+    {
+      "name": "Shelter account locks region and public shelter pages connect to shared listings",
+      "passed": true
+    },
+    {
+      "name": "Approved layout stays within mobile/tablet viewports",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "additional_checks": {
+    "passed": 3,
+    "errors": []
+  },
+  "build": "passed",
+  "design_files": {
+    "src/pages/DashboardPage.jsx": {
+      "unchanged_from_approved": true,
+      "sha256": "28038039c53da1633c8a020ace83d9160d225f11d50515af0b213959b77a76b9"
+    },
+    "src/pages/PetFormPage.jsx": {
+      "unchanged_from_approved": true,
+      "sha256": "cef95639cf08ff51450725e411d02274b23ae03273c8056f410d3fb980d8e73f"
+    },
+    "src/components/WorkspaceUI.jsx": {
+      "unchanged_from_approved": true,
+      "sha256": "88c5276b91f7ed57147ac24965d700fd047dbf9236b2820e1d81ed09bc6fa9b0"
+    },
+    "src/components/Motion.jsx": {
+      "unchanged_from_approved": true,
+      "sha256": "560d910fb4865e7d84bb3ae4f971b8fa6ada3a73811c56e9a1bc5d0859a1066f"
+    },
+    "src/components/PetPhotoUpload.jsx": {
+      "unchanged_from_approved": true,
+      "sha256": "5124ab08b193e5ecd4d87c00c7bf586883ec42216146ed3cc53cfe223871c2e4"
+    }
+  },
+  "preserved_team_files": [
+    "src/pages/HomePage.jsx",
+    "src/pages/PetListPage.jsx",
+    "src/pages/ShelterDetailsPage.jsx",
+    "src/pages/ShelterListPage.jsx",
+    "src/components/Footer.jsx",
+    "src/context/AppDataContext.jsx",
+    "src/main.jsx",
+    "src/data/constants.js",
+    "src/data/selectors.js",
+    "package.json",
+    "package-lock.json"
+  ]
+}
