@@ -12,10 +12,9 @@ const inputClass =
   "dark:bg-gray-900";
 const errorClass = "mt-1.5 text-sm text-red-700";
 
-// One-click demo logins, so testers don't have to type the sample emails and password.
-const DEMO_ACCOUNTS = [
-  { email: "alex@example.com", label: "Adopter", hint: "Alex Morgan" },
-  { email: "central@example.com", label: "Shelter", hint: "Central Paws Rescue" },
+const LOGIN_ROLES = [
+  { value: "adopter", label: "Adopter", hint: "Your adopter account" },
+  { value: "shelter", label: "Shelter", hint: "Your shelter account" },
 ];
 
 // Checks the form values and returns an object of error messages.
@@ -31,6 +30,14 @@ function validate(values) {
   return errors;
 }
 
+function readCredentials(form) {
+  const values = new FormData(form);
+  return {
+    email: String(values.get("email") || ""),
+    password: String(values.get("password") || ""),
+  };
+}
+
 function LoginPage() {
   const navigate = useNavigate();
   const { data, setData } = useAppData();
@@ -41,22 +48,25 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm(readCredentials(e.currentTarget.form));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    const credentials = readCredentials(e.currentTarget);
+    const requestedRole = e.nativeEvent.submitter?.dataset.accountRole;
+    setForm(credentials);
     setLoginError("");
+    setData((previous) => ({ ...previous, currentUserId: null }));
 
-    const found = validate(form);
+    const found = validate(credentials);
     setErrors(found);
     if (Object.keys(found).length > 0) return; // stop if there are errors
 
     const user = data.users.find(
       (candidate) =>
-        candidate.email.toLowerCase() === form.email.trim().toLowerCase() &&
-        candidate.password === form.password,
+        candidate.email.toLowerCase() === credentials.email.trim().toLowerCase() &&
+        candidate.password === credentials.password,
     );
 
     // Same message for both cases, so the form doesn't reveal which emails are registered.
@@ -65,17 +75,12 @@ function LoginPage() {
       return;
     }
 
-    setData((previous) => ({ ...previous, currentUserId: user.id }));
-    navigate("/dashboard");
-  }
-
-  // Logs straight in as one of the demo accounts.
-  function logInAsDemo(email) {
-    const user = data.users.find((candidate) => candidate.email === email);
-    if (!user) {
-      setLoginError("That demo account isn't available");
+    if (requestedRole && user.role !== requestedRole) {
+      const accountType = user.role === "shelter" ? "Shelter" : "Adopter";
+      setLoginError(`This account uses the ${accountType} login. Choose Log in as ${accountType}.`);
       return;
     }
+
     setData((previous) => ({ ...previous, currentUserId: user.id }));
     navigate("/dashboard");
   }
@@ -93,7 +98,7 @@ function LoginPage() {
           </p>
         )}
 
-        <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
+        <form id="paws-login-form" onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
           <div>
             <label htmlFor="email" className={labelClass}>Email</label>
             <input
@@ -151,15 +156,16 @@ function LoginPage() {
         <div className="mt-6">
           <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-navy/60">
             <span className="h-px flex-1 bg-navy/15" aria-hidden="true" />
-            Or try a demo account
+            Or sign in by account type
             <span className="h-px flex-1 bg-navy/15" aria-hidden="true" />
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {DEMO_ACCOUNTS.map((account) => (
+            {LOGIN_ROLES.map((account) => (
               <button
-                key={account.email}
-                type="button"
-                onClick={() => logInAsDemo(account.email)}
+                key={account.value}
+                type="submit"
+                form="paws-login-form"
+                data-account-role={account.value}
                 className="rounded-lg border border-navy/20 px-4 py-3 text-left hover:border-coral hover:bg-peach focus:outline-none focus:ring-2 focus:ring-coral"
               >
                 <span className="block font-semibold text-navy">Log in as {account.label}</span>

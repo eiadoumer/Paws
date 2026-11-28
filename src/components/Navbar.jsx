@@ -60,7 +60,6 @@ function Navbar() {
             <div className="hidden items-center gap-2 md:flex">
               {user ? (
                 <>
-                  <span className="px-2 text-sm text-navy/70">Hi, {user.name.split(" ")[0]}</span>
                   <button type="button" onClick={logOut} className={outlineClass}>Log out</button>
                 </>
               ) : (
