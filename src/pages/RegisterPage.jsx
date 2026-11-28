@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { REGIONS, ROLES } from "../data/constants.js";
-import { mockUsers as users } from "../data/mockData.js";
+import { useAppData } from "../context/AppDataContext.jsx";
 
 // Shared Tailwind classes, written once so every field looks the same.
 // Mobile first: base classes are for phones, sm:/md: add tweaks for bigger screens.
@@ -47,6 +47,7 @@ function validate(values, existingUsers) {
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const { data, setData } = useAppData();
 
   const [form, setForm] = useState({
     name: "",
@@ -75,11 +76,11 @@ function RegisterPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const found = validate(form, users);
+    const found = validate(form, data.users);
     setErrors(found);
     if (Object.keys(found).length > 0) return; // stop if there are errors
 
-    // Only the fields that belong to a user (no confirmPassword, terms or shelter fields).
+    const shelterId = form.role === "shelter" ? `shelter-${crypto.randomUUID()}` : null;
     const newUser = {
       id: `user-${crypto.randomUUID()}`,
       name: form.name.trim(),
@@ -87,11 +88,27 @@ function RegisterPage() {
       password: form.password,
       role: form.role,
       region: form.region,
-      shelterId: null, // later: the id returned by addShelter() for shelter accounts
+      shelterId,
       createdAt: new Date().toISOString(),
     };
-    // Later: replace this log with register(newUser) from AuthContext.
-    console.log("New user:", newUser);
+    const shelter = shelterId ? {
+      id: shelterId,
+      ownerId: newUser.id,
+      name: form.shelterName.trim(),
+      region: form.region,
+      address: form.shelterAddress.trim(),
+      phone: form.shelterPhone.trim(),
+      email: newUser.email,
+      description: form.shelterDescription.trim(),
+      openingHours: [],
+      createdAt: newUser.createdAt,
+    } : null;
+    setData((previous) => ({
+      ...previous,
+      users: [...previous.users, newUser],
+      shelters: shelter ? [...previous.shelters, shelter] : previous.shelters,
+      currentUserId: newUser.id,
+    }));
     navigate("/dashboard");
   }
 

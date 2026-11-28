@@ -1,16 +1,7 @@
 import { Link, useParams } from "react-router";
 import { SPECIES, SIZES, REGIONS } from "../data/constants";
-import { mockPets, mockShelters } from "../data/mockData";
+import { useAppData } from "../context/AppDataContext.jsx";
 import { getPetAgeLabel } from "../data/selectors";
-
-/*
-  Shows one pet, looked up by the id in the URL (/pets/:id).
-  Reading the id from the URL means refreshing the page or opening
-  a shared link works, not only clicking a card in the pet list.
-
-  Later, when PetsContext exists, read `pets` and `shelters` from it
-  instead of the mock arrays so newly added pets show up too.
-*/
 
 // Turn a stored value like "mount-lebanon" into its label "Mount Lebanon".
 function getLabel(list, value) {
@@ -27,7 +18,8 @@ const STATUS_STYLES = {
 
 function PetDetailsPage() {
   const { id } = useParams();
-  const pet = mockPets.find((p) => p.id === id);
+  const { data } = useAppData();
+  const pet = data.pets.find((p) => p.id === id);
 
   // Unknown id in the URL.
   if (!pet) {
@@ -49,7 +41,7 @@ function PetDetailsPage() {
     );
   }
 
-  const shelter = mockShelters.find((s) => s.id === pet.shelterId);
+  const shelter = data.shelters.find((s) => s.id === pet.shelterId);
   const status = pet.status || "available";
   const isAvailable = status === "available";
 
